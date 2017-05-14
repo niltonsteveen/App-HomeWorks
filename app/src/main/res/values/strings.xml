@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">HomeWorks</string>
+    <string name="Ingreso">Ingreso</string>
+    <string name="correo">example@gmail.com</string>
+    <string name="password">Contraseña</string>
+    <string name="login">Iniciar Sesión</string>
+    <string name="Access">Acceso Rápido</string>
+    <string name="loginGmail">Google</string>
+    <string name="loginFacebook">Facebook</string>
+    <string name="facebook_app_id">TU_ID_APP</string>
+
+    <string name="welcome">Bienvenido</string>
+    <string name="cancel_login">Se canceló la operación</string>
+    <string name="error_login">Ocurrió un error al ingresar</string>
+    <string name="logout">Cerrar sesión</string>
+    <string name="firebase_error_login">Error al iniciar sesión en Firebase</string>
+    <string name="app_id">416807962035860</string>
+    <string name="Actividades">Actividades</string>
+    <string name="Perfil">Perfil</string>
+    <string name="Configuración">Configuración</string>
+    <string name="Logout">Cerrar Sesión</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="actividades_en_curso">En curso</string>
+    <string name="expire">Expiradas</string>
+    <string name="CrearAct">Crear Actividad</string>
+    <string name="selection">Selecciona Grupo:</string>
+    <string name="selectionAsignatura">Selecciona Asignatura:</string>
+    <string name="tituloAct">Título de la actividad</string>
+    <string name="limite">Fecha Límite:</string>
+    <string name="descripcion">Descripción:</string>
+    <string name="crear">Crear</string>
+</resources>

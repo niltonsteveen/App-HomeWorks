@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_activity"
+            android:checked="true"
+            android:icon="@drawable/note_multiple"
+            android:title="@string/Actividades" />
+        <item
+            android:id="@+id/nav_perfil"
+            android:icon="@drawable/account_settings"
+            android:title="@string/Perfil" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/settings"
+            android:title="@string/Configuración" />
+        <item
+            android:id="@+id/nav_power"
+            android:icon="@drawable/power"
+            android:title="@string/Logout" />
+    </group>
+</menu>

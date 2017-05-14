@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="220dp"
+    android:background="@drawable/back_header"
+    android:orientation="vertical"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingLeft="16dp"
+        android:layout_weight="6">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgRol"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="18dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/padres"
+            />
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/tvNameHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingLeft="16dp"
+        android:textSize="16sp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+    <TextView
+        android:id="@+id/tvEmailHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="1"
+        android:paddingLeft="16dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+</LinearLayout>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#4a9997</color>
+    <color name="colorPrimaryDark">#1e3f3e</color>
+    <color name="colorAccent">#52489b</color>
+    <color name="colorBackSplash">#479c9c</color>
+    <color name="colorBlack">#000000</color>
+    <color name="letter">#FFFFFF</color>
+    <color name="colorGmail">#E01A1A</color>
+    <color name="colorFacebook">#3b5998</color>
+    <color name="colorRegistrar">#2745F0</color>
+    <color name="light">#1565C0</color>
+    <color name="colorLogo">#1d9670</color>
+    <color name="light2">#dfeae9</color>
+</resources>
