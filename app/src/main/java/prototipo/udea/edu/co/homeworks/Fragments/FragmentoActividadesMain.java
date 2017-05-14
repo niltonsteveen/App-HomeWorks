@@ -44,6 +44,8 @@ public class FragmentoActividadesMain extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_paginado, container, false);
+        Bundle extras=getActivity().getIntent().getExtras();
+        usuario=extras.getParcelable("Usuario");
 
         if (savedInstanceState == null) {
             insertarTabs(container);

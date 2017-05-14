@@ -13,8 +13,16 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import prototipo.udea.edu.co.homeworks.Model.Actividad;
+import prototipo.udea.edu.co.homeworks.Model.Usuario;
 import prototipo.udea.edu.co.homeworks.R;
+import prototipo.udea.edu.co.homeworks.WebServices.ActividadWS;
+import prototipo.udea.edu.co.homeworks.WebServices.UsuarioWS;
 import prototipo.udea.edu.co.homeworks.utils.ActivityAdapter;
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 
 public class Activities_teacher extends Fragment {
@@ -30,6 +38,8 @@ public class Activities_teacher extends Fragment {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager lManager;
     private FloatingActionButton actionButton;
+    private Usuario usuario;
+    private String url= "https://rest-homeworks.herokuapp.com/api";
     List items=new ArrayList();
 
     public Activities_teacher() {
@@ -57,14 +67,18 @@ public class Activities_teacher extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_activities_teacher, container, false);
-items.add("nilton");
+        final View view= inflater.inflate(R.layout.fragment_activities_teacher, container, false);
+
+        Bundle arguments=getArguments();
+        usuario=arguments.getParcelable("Usuario");
 
         actionButton=(FloatingActionButton) view.findViewById(R.id.fabAddActivity);
         actionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Crear_Actividad crear_actividad=new Crear_Actividad();
+                Bundle arguments=new Bundle();
+                arguments.putParcelable("Usuario", usuario);
+                Crear_Actividad crear_actividad=Crear_Actividad.newInstance(arguments);
 
                 FragmentManager fragmentManager=getFragmentManager();
                 fragmentManager
@@ -74,12 +88,28 @@ items.add("nilton");
             }
         });
 
-        recycler = (RecyclerView) view.findViewById(R.id.reciclador1);
-        recycler.setHasFixedSize(true);
-        lManager = new LinearLayoutManager(getContext());
-        recycler.setLayoutManager(lManager);
-        adapter = new ActivityAdapter(items);
-        recycler.setAdapter(adapter);
+        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(url).build();
+
+        final ActividadWS actividadWS=restAdapter.create(ActividadWS.class);
+
+        actividadWS.getActividades(usuario.getEmail(), new Callback<List<Actividad>>() {
+            @Override
+            public void success(List<Actividad> actividads, Response response) {
+                recycler = (RecyclerView) view.findViewById(R.id.reciclador1);
+                recycler.setHasFixedSize(true);
+                lManager = new LinearLayoutManager(getContext());
+                recycler.setLayoutManager(lManager);
+                adapter = new ActivityAdapter(actividads);
+                recycler.setAdapter(adapter);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
+
+
 
         return view;
 

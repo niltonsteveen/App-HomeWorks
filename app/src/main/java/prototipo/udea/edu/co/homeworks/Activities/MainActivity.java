@@ -122,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
                     .replace(R.id.main_content, actividadesMain)
                     .commit();
         }
+        setTitle(itemDrawer.getTitle());
 
         /*FragmentoCuenta fragmentoCuenta = null;
         ListSolicitudesFragment fragmentoSolicitud = null;

@@ -12,4 +12,21 @@
     <color name="light">#1565C0</color>
     <color name="colorLogo">#1d9670</color>
     <color name="light2">#dfeae9</color>
+    <color name="back_card">#2d566b</color>
+    <color name="back_letter">#81DAF5</color>
+
+    <!--colores para el ciruclo del card-->
+    <color name="card1">#B34444</color>
+    <color name="card2">#B3447B</color>
+    <color name="card3">#AC44B3</color>
+    <color name="card4">#7444B3</color>
+    <color name="card5">#4453B3</color>
+    <color name="card6">#447FB3</color>
+    <color name="card7">#44B383</color>
+    <color name="card8">#44B34B</color>
+    <color name="card9">#70B344</color>
+    <color name="card10">#AFB344</color>
+    <color name="card11">#B38744</color>
+    <color name="card12">#B36944</color>
+
 </resources>

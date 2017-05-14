@@ -26,21 +26,11 @@
             android:id="@+id/layoutRadioButtons"
             android:layout_below="@id/tvSeleccionarGrupo">
             <RadioGroup
+                android:id="@+id/radioGroupGrupos"
                 android:layout_width="match_parent"
                 android:layout_marginTop="10dp"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <RadioButton
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="GRUPO10A"/>
-                <RadioButton
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="GRUPO10B"/>
-
             </RadioGroup>
         </LinearLayout>
 
@@ -63,19 +53,9 @@
             <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_marginTop="10dp"
+                android:id="@+id/radioGroupAsignaturas"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <RadioButton
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Matematicas"/>
-                <RadioButton
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Español"/>
-            </RadioGroup>
+                android:orientation="horizontal"/>
         </LinearLayout>
 
         <LinearLayout
@@ -110,6 +90,7 @@
             android:layout_marginTop="30dp"
             android:layout_below="@+id/layoutTituloAct">
             <LinearLayout
+                android:id="@+id/linearLayoutFecha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -120,11 +101,25 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:text="@string/limite"
                     android:textSize="18sp"/>
-                <Spinner
+
+                <TextView
+                    android:paddingLeft="10dp"
+                    android:id="@+id/tvFechaLim"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"></Spinner>
+                    android:layout_weight="1"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp"/>
+                <Button
+                    android:id="@+id/btnCambiarFecha"
+                    android:layout_width="0dp"
+                    android:text="@string/cambiar"
+                    android:textColor="@color/letter"
+                    android:backgroundTint="@color/colorAccent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"></Button>
             </LinearLayout>
+
         </RelativeLayout>
 
         <TextView
