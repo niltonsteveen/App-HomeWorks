@@ -75,10 +75,20 @@ public class FragmentoActividadesMain extends Fragment {
         AdaptadorSecciones adapter = new AdaptadorSecciones(getFragmentManager());
         Bundle arguments=new Bundle();
         arguments.putParcelable("Usuario",this.getUsuario());
-        Activities_teacher activities_teacher=Activities_teacher.newInstance(arguments);
-        adapter.addFragment(activities_teacher, getString(R.string.actividades_en_curso));
-      //  adapter.addFragment(activities_teacher, getString(R.string.expire));
-        viewPager.setAdapter(adapter);
+
+        if("PROFESOR".equalsIgnoreCase(usuario.getRol())){
+            Activities_teacher activities_teacher=Activities_teacher.newInstance(arguments);
+            adapter.addFragment(activities_teacher, getString(R.string.actividades_en_curso));
+            //  adapter.addFragment(activities_teacher, getString(R.string.expire));
+            viewPager.setAdapter(adapter);
+
+        }else{
+            ActivitiesParent activitiesParent= ActivitiesParent.newInstance(arguments);
+            adapter.addFragment(activitiesParent, getString(R.string.actividades_en_curso));
+            //  adapter.addFragment(activities_teacher, getString(R.string.expire));
+            viewPager.setAdapter(adapter);
+        }
+
     }
 
     @Override

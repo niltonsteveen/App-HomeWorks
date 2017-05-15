@@ -97,7 +97,6 @@ public class LoginActivity extends AppCompatActivity {
                         }
 
                     }
-
                     @Override
                     public void failure(RetrofitError error) {
                         error.printStackTrace();

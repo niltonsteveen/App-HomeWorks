@@ -1,11 +1,14 @@
 package prototipo.udea.edu.co.homeworks.utils;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -34,6 +37,8 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Activi
     final AsignaturaWS asignaturaWS;
     final GrupoWs grupoWs;
     int numero;
+    private Context context;
+
 
 
     public static class ActivityViewHolder extends RecyclerView.ViewHolder {
@@ -43,11 +48,13 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Activi
         public TextView asignatura;
         public CardView cardImg;
         public TextView tvCard;
+        public View view;
 
 
 
         public ActivityViewHolder(View v) {
             super(v);
+            this.view= v;
             cardImg=(CardView) v.findViewById(R.id.cardImg);
             tvCard=(TextView) v.findViewById(R.id.tvLetterCard);
             descripcion = (TextView) v.findViewById(R.id.tvDescripcionList);
@@ -59,13 +66,14 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Activi
     /*public ActivityAdapter(List<Solicitud> items) {
         this.items = items;
     }*/
-    public ActivityAdapter(List items) {
+    public ActivityAdapter(List items, Context context) {
         this.items = items;
         this.colores=new ArrayList<>();
         asignarArray();
         this.restAdapter = new RestAdapter.Builder().setEndpoint(url).build();
         asignaturaWS=restAdapter.create(AsignaturaWS.class);
         grupoWs=restAdapter.create(GrupoWs.class);
+        this.context=context;
     }
 
     private void asignarArray() {
@@ -127,6 +135,12 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Activi
             }
         });
 
+        setAnimation(viewHolder.view);
+
     }
 
+    private void setAnimation(View viewToAnimate) {
+        Animation animation = AnimationUtils.loadAnimation(context, R.anim.left_animation);
+        viewToAnimate.startAnimation(animation);
+    }
 }

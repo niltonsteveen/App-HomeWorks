@@ -99,7 +99,7 @@ public class Activities_teacher extends Fragment {
                     recycler.setHasFixedSize(true);
                     lManager = new LinearLayoutManager(getContext());
                     recycler.setLayoutManager(lManager);
-                    adapter = new ActivityAdapter(actividads);
+                    adapter = new ActivityAdapter(actividads, getContext());
                     recycler.setAdapter(adapter);
                 }
 
@@ -108,9 +108,6 @@ public class Activities_teacher extends Fragment {
 
             }
         });
-
-
-
         return view;
 
     }
