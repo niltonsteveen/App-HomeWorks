@@ -114,11 +114,11 @@ public class MainActivity extends AppCompatActivity {
                 getIntent().putExtra("Usuario",usuario);
                 getSupportFragmentManager().beginTransaction().replace(R.id.main_content, actividadesMain).commit();
                 break;
-            case R.id.nav_settings:
+            /*case R.id.nav_settings:
                 getSupportFragmentManager().beginTransaction().replace(R.id.main_content,new FragmentVacio()).commit();
                 PreFragConf preFragConf=new PreFragConf();
                 getFragmentManager().beginTransaction().replace(R.id.main_content, preFragConf).commit();
-                break;
+                break;*/
         }
         setTitle(itemDrawer.getTitle());
 
