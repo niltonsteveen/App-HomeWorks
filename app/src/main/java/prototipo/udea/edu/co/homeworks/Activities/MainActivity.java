@@ -2,9 +2,10 @@ package prototipo.udea.edu.co.homeworks.Activities;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.preference.PreferenceFragment;
 import android.support.annotation.NonNull;
+import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -13,15 +14,15 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import prototipo.udea.edu.co.homeworks.Fragments.Activities_teacher;
+import prototipo.udea.edu.co.homeworks.Fragments.FragmentVacio;
 import prototipo.udea.edu.co.homeworks.Fragments.FragmentoActividadesMain;
+import prototipo.udea.edu.co.homeworks.Fragments.PreFragConf;
 import prototipo.udea.edu.co.homeworks.Model.Usuario;
 import prototipo.udea.edu.co.homeworks.R;
 
@@ -106,21 +107,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void seleccionarItem(MenuItem itemDrawer) {
-        FragmentoActividadesMain actividadesMain=null;
-        FragmentManager fragmentManager = getSupportFragmentManager();
-
+      //  FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentoActividadesMain actividadesMain=new FragmentoActividadesMain();;
         switch (itemDrawer.getItemId()) {
             case R.id.nav_activity:
                 getIntent().putExtra("Usuario",usuario);
-                actividadesMain = new FragmentoActividadesMain();
+                getSupportFragmentManager().beginTransaction().replace(R.id.main_content, actividadesMain).commit();
                 break;
-        }
-
-        if (actividadesMain != null) {
-            fragmentManager
-                    .beginTransaction()
-                    .replace(R.id.main_content, actividadesMain)
-                    .commit();
+            case R.id.nav_settings:
+                getSupportFragmentManager().beginTransaction().replace(R.id.main_content,new FragmentVacio()).commit();
+                PreFragConf preFragConf=new PreFragConf();
+                getFragmentManager().beginTransaction().replace(R.id.main_content, preFragConf).commit();
+                break;
         }
         setTitle(itemDrawer.getTitle());
 

@@ -77,7 +77,8 @@ public class FragmentoActividadesMain extends Fragment {
         arguments.putParcelable("Usuario",this.getUsuario());
         Activities_teacher activities_teacher=Activities_teacher.newInstance(arguments);
         adapter.addFragment(activities_teacher, getString(R.string.actividades_en_curso));
-      //  adapter.addFragment(activities_teacher, getString(R.string.expire));
+        Activities_teacher_expire activities_teacher_expire=Activities_teacher_expire.newInstance(arguments);
+        adapter.addFragment(activities_teacher_expire, getString(R.string.expire));
         viewPager.setAdapter(adapter);
     }
 
