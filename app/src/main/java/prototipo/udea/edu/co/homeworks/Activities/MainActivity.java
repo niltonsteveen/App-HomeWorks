@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,12 +19,23 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.iid.FirebaseInstanceId;
+
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import prototipo.udea.edu.co.homeworks.Fragments.Activities_teacher;
 import prototipo.udea.edu.co.homeworks.Fragments.FragmentoActividadesMain;
+import prototipo.udea.edu.co.homeworks.Model.Actividad;
+import prototipo.udea.edu.co.homeworks.Model.ConfigParent;
 import prototipo.udea.edu.co.homeworks.Model.Usuario;
 import prototipo.udea.edu.co.homeworks.R;
+import prototipo.udea.edu.co.homeworks.WebServices.UsuarioWS;
+import prototipo.udea.edu.co.homeworks.WebServices.builders.RestClientBuilder;
+import prototipo.udea.edu.co.homeworks.utils.NotificationSender;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -71,6 +83,16 @@ public class MainActivity extends AppCompatActivity {
             // Seleccionar item por defecto
             seleccionarItem(navigationView.getMenu().getItem(0));
         }
+
+        // Get updated InstanceID token.
+        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+        Log.d("token", "Refreshed token: " + refreshedToken);
+        usuario.setToken(refreshedToken);
+
+        // If you want to send messages to this application instance or
+        // manage this apps subscriptions on the server side, send the
+        // Instance ID token to your app server.
+        sendRegistrationToServer(usuario);
 /*
         mAuth=FirebaseAuth.getInstance();
         authStateListener=new FirebaseAuth.AuthStateListener() {
@@ -90,6 +112,27 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
     }
+
+    private void sendRegistrationToServer(Usuario  user) {
+       final UsuarioWS userWs= RestClientBuilder.restUsuario();
+
+        userWs.updateUser(user,  new Callback<Usuario>() {
+            @Override
+            public void success(Usuario usuario, Response response) {
+                    Log.e("tokenupdated", usuario.getToken());
+
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Log.e("fallo1", error.getMessage());
+            }
+        });
+        //final String token = user.getToken();
+        //final String message ="mensaje de prueba app to app";
+       // NotificationSender.sendNotification(token, message);
+    }
+
 
     private void prepararDrawer(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(

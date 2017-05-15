@@ -1,35 +1,27 @@
 {
   "project_info": {
-    "project_number": "972578976714",
-    "firebase_url": "https://homeworks-520fc.firebaseio.com",
-    "project_id": "homeworks-520fc",
-    "storage_bucket": "homeworks-520fc.appspot.com"
+    "project_number": "611006277247",
+    "firebase_url": "https://homeworks-eced8.firebaseio.com",
+    "project_id": "homeworks-eced8",
+    "storage_bucket": "homeworks-eced8.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:972578976714:android:d2458525f0666677",
+        "mobilesdk_app_id": "1:611006277247:android:d2458525f0666677",
         "android_client_info": {
           "package_name": "prototipo.udea.edu.co.homeworks"
         }
       },
       "oauth_client": [
         {
-          "client_id": "972578976714-i533lec3rj278e1smqpe5ke4in544o2p.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "prototipo.udea.edu.co.homeworks",
-            "certificate_hash": "adaf69366849b063882cfcffe092391a00b33135"
-          }
-        },
-        {
-          "client_id": "972578976714-8ud29l7nlc3rb5nlb8lf080jm11jdgel.apps.googleusercontent.com",
+          "client_id": "611006277247-dblk4rnbib4ouhese3gi2deh95of3she.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyACVgYCQU83ITUeIbhCsmT2ZZwtEKSrq2A"
+          "current_key": "AIzaSyBHtKNHzFRyBszk4ezEcX6fkXxPHwqW9GE"
         }
       ],
       "services": {
@@ -37,13 +29,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "972578976714-8ud29l7nlc3rb5nlb8lf080jm11jdgel.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2
