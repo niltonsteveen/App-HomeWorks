@@ -22,7 +22,6 @@ import prototipo.udea.edu.co.homeworks.Model.Actividad;
 import prototipo.udea.edu.co.homeworks.Model.Usuario;
 import prototipo.udea.edu.co.homeworks.R;
 import prototipo.udea.edu.co.homeworks.WebServices.ActividadWS;
-import prototipo.udea.edu.co.homeworks.WebServices.UsuarioWS;
 import prototipo.udea.edu.co.homeworks.utils.ActivityAdapter;
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -30,7 +29,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 
-public class Activities_teacher extends Fragment {
+public class Activities_teacher_expire extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -47,12 +46,12 @@ public class Activities_teacher extends Fragment {
     private String url= "https://rest-homeworks.herokuapp.com/api";
     List items=new ArrayList();
 
-    public Activities_teacher() {
+    public Activities_teacher_expire() {
         // Required empty public constructor
     }
 
-    public static Activities_teacher newInstance(Bundle arguments) {
-        Activities_teacher fragment = new Activities_teacher();
+    public static Activities_teacher_expire newInstance(Bundle arguments) {
+        Activities_teacher_expire fragment = new Activities_teacher_expire();
         if(arguments != null){
             fragment.setArguments(arguments);
         }
@@ -72,12 +71,12 @@ public class Activities_teacher extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View view= inflater.inflate(R.layout.fragment_activities_teacher, container, false);
+        final View view= inflater.inflate(R.layout.fragment_activities_teacher_expire, container, false);
 
         Bundle arguments=getArguments();
         usuario=arguments.getParcelable("Usuario");
 
-        actionButton=(FloatingActionButton) view.findViewById(R.id.fabAddActivity);
+        actionButton=(FloatingActionButton) view.findViewById(R.id.fabAddActivity1);
         actionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,16 +110,17 @@ public class Activities_teacher extends Fragment {
                         try {
                             Date fechaLim=formatter.parse(actividads.get(i).getFechaLimite());
                             c.setTime(fechaLim);
-                            if(actividads.get(i).getProfesor().equals(usuario.getEmail())&&año==c.get(Calendar.YEAR)&&
-                                    mes<=c.get(Calendar.MONTH)+1&&dia<=c.get(Calendar.DAY_OF_MONTH)){
+                            if(actividads.get(i).getProfesor().equals(usuario.getEmail())&&año==c.get(Calendar.YEAR)){
+                                if((mes==c.get(Calendar.MONTH)+1&&dia>c.get(Calendar.DAY_OF_MONTH))||mes>c.get(Calendar.MONTH)+1){
                                     activitiesByEmail.add(actividads.get(i));
+                                }
                             }
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
 
                     }
-                    recycler = (RecyclerView) view.findViewById(R.id.reciclador1);
+                    recycler = (RecyclerView) view.findViewById(R.id.reciclador2);
                     recycler.setHasFixedSize(true);
                     lManager = new LinearLayoutManager(getContext());
                     recycler.setLayoutManager(lManager);
@@ -133,6 +133,9 @@ public class Activities_teacher extends Fragment {
                 error.printStackTrace();
             }
         });
+
+
+
         return view;
 
     }

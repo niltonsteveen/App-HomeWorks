@@ -24,8 +24,9 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import prototipo.udea.edu.co.homeworks.Fragments.Activities_teacher;
+import prototipo.udea.edu.co.homeworks.Fragments.FragmentVacio;
 import prototipo.udea.edu.co.homeworks.Fragments.FragmentoActividadesMain;
+import prototipo.udea.edu.co.homeworks.Fragments.PreFragConf;
 import prototipo.udea.edu.co.homeworks.Model.Actividad;
 import prototipo.udea.edu.co.homeworks.Model.ConfigParent;
 import prototipo.udea.edu.co.homeworks.Model.Usuario;
@@ -149,21 +150,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void seleccionarItem(MenuItem itemDrawer) {
-        FragmentoActividadesMain actividadesMain=null;
-        FragmentManager fragmentManager = getSupportFragmentManager();
-
+      //  FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentoActividadesMain actividadesMain=new FragmentoActividadesMain();;
         switch (itemDrawer.getItemId()) {
             case R.id.nav_activity:
                 getIntent().putExtra("Usuario",usuario);
-                actividadesMain = new FragmentoActividadesMain();
+                getSupportFragmentManager().beginTransaction().replace(R.id.main_content, actividadesMain).commit();
                 break;
-        }
-
-        if (actividadesMain != null) {
-            fragmentManager
-                    .beginTransaction()
-                    .replace(R.id.main_content, actividadesMain)
-                    .commit();
+            /*case R.id.nav_settings:
+                getSupportFragmentManager().beginTransaction().replace(R.id.main_content,new FragmentVacio()).commit();
+                PreFragConf preFragConf=new PreFragConf();
+                getFragmentManager().beginTransaction().replace(R.id.main_content, preFragConf).commit();
+                break;*/
         }
         setTitle(itemDrawer.getTitle());
 
