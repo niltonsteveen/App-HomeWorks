@@ -100,11 +100,12 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Activi
 
     @Override
     public void onBindViewHolder(final ActivityViewHolder viewHolder, final int i) {
-        Random r=new Random();
-        numero=r.nextInt(12);
+
         asignaturaWS.getAsignaturaById(items.get(i).getAsignatura(), new Callback<Asignatura>() {
                     @Override
                     public void success(Asignatura asignatura, Response response) {
+                        Random r=new Random();
+                        numero=r.nextInt(12);
                         String letra=asignatura.getNombre().charAt(0)+"";
                         viewHolder.tvCard.setText(letra);
                         viewHolder.cardImg.setCardBackgroundColor(Color.parseColor(colores.get(numero)));

@@ -36,8 +36,12 @@ public class FragmentoActividadesMain extends Fragment {
 
     }
 
-    public interface Comunicador{
-        public void enviar(Usuario user);
+    public static FragmentoActividadesMain newInstance(Bundle arguments) {
+        FragmentoActividadesMain fragment = new FragmentoActividadesMain();
+        if(arguments != null){
+            fragment.setArguments(arguments);
+        }
+        return fragment;
     }
 
     @Override

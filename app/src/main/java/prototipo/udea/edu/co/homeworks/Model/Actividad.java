@@ -98,6 +98,8 @@ public class Actividad implements Parcelable {
         this.id = id;
     }
 
+    public Actividad() {
+    }
 
     protected Actividad(Parcel in) {
         profesor = in.readString();
@@ -109,6 +111,14 @@ public class Actividad implements Parcelable {
         byte activaVal = in.readByte();
         activa = activaVal == 0x02 ? null : activaVal != 0x00;
         id = in.readByte() == 0x00 ? null : in.readInt();
+    }
+
+    @Override
+    public String toString() {
+        String res=this.getDescripcion()+"-------"+this.getFechaCreacion()+"-------"+
+                this.getFechaLimite()+"-------"+this.getProfesor()+"-------"+this.getActiva()+
+                "-------"+this.getAsignatura()+"-------"+this.getGrupo()+"-------"+this.getId();
+        return res;
     }
 
     @Override
