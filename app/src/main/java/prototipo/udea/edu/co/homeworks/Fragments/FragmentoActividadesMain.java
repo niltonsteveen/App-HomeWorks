@@ -63,10 +63,6 @@ public class FragmentoActividadesMain extends Fragment {
         return view;
     }
 
-    public void setUserLoged(Usuario usuario){
-        this.usuario=usuario;
-    }
-
     private void insertarTabs(ViewGroup container) {
         View padre = (View) container.getParent();
         appBar = (AppBarLayout) padre.findViewById(R.id.appbar);

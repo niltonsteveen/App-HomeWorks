@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -16,9 +15,7 @@ import java.util.Random;
 import prototipo.udea.edu.co.homeworks.Model.Actividad;
 import prototipo.udea.edu.co.homeworks.Model.Asignatura;
 import prototipo.udea.edu.co.homeworks.Model.Grupo;
-import prototipo.udea.edu.co.homeworks.Model.Usuario;
 import prototipo.udea.edu.co.homeworks.R;
-import prototipo.udea.edu.co.homeworks.WebServices.ActividadWS;
 import prototipo.udea.edu.co.homeworks.WebServices.AsignaturaWS;
 import prototipo.udea.edu.co.homeworks.WebServices.GrupoWs;
 import retrofit.Callback;

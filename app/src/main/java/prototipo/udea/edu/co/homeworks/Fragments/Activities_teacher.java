@@ -93,15 +93,15 @@ public class Activities_teacher extends Fragment {
         final ActividadWS actividadWS=restAdapter.create(ActividadWS.class);
 
         actividadWS.getActividades(usuario.getEmail(), new Callback<List<Actividad>>() {
-            @Override
-            public void success(List<Actividad> actividads, Response response) {
-                recycler = (RecyclerView) view.findViewById(R.id.reciclador1);
-                recycler.setHasFixedSize(true);
-                lManager = new LinearLayoutManager(getContext());
-                recycler.setLayoutManager(lManager);
-                adapter = new ActivityAdapter(actividads);
-                recycler.setAdapter(adapter);
-            }
+                @Override
+                public void success(List<Actividad> actividads, Response response) {
+                    recycler = (RecyclerView) view.findViewById(R.id.reciclador1);
+                    recycler.setHasFixedSize(true);
+                    lManager = new LinearLayoutManager(getContext());
+                    recycler.setLayoutManager(lManager);
+                    adapter = new ActivityAdapter(actividads);
+                    recycler.setAdapter(adapter);
+                }
 
             @Override
             public void failure(RetrofitError error) {

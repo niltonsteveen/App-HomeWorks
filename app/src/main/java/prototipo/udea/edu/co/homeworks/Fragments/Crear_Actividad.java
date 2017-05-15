@@ -116,8 +116,6 @@ public class Crear_Actividad extends Fragment {
                 actividad.setDescripcion(descripcionCrearAct.getText().toString());
                 Date fechaCreacion=new Date();
                 actividad.setFechaCreacion(fechaCreacion.toString());
-
-                System.out.println("-------------------------"+fechaLimite);
                 actividad.setFechaLimite(fechaLimite);
 
                 String asignatura="";
@@ -139,8 +137,6 @@ public class Crear_Actividad extends Fragment {
                     }
                 }
                 actividad.setGrupo(valor1);
-
-                System.out.println(actividad.toString());
 
                 actividadWS.createActivity(actividad, new Callback<Actividad>() {
                     @Override
