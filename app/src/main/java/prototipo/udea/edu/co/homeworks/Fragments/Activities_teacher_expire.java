@@ -96,7 +96,7 @@ public class Activities_teacher_expire extends Fragment {
 
         final ActividadWS actividadWS=restAdapter.create(ActividadWS.class);
         final List<Actividad> activitiesByEmail=new ArrayList<>();
-        actividadWS.getTodasActividades(new Callback<List<Actividad>>() {
+        actividadWS.getActividadesAll(new Callback<List<Actividad>>() {
                 @Override
                 public void success(List<Actividad> actividads, Response response) {
                     Date fecha=new Date();
@@ -124,7 +124,7 @@ public class Activities_teacher_expire extends Fragment {
                     recycler.setHasFixedSize(true);
                     lManager = new LinearLayoutManager(getContext());
                     recycler.setLayoutManager(lManager);
-                    adapter = new ActivityAdapter(activitiesByEmail);
+                    adapter = new ActivityAdapter(activitiesByEmail, getContext());
                     recycler.setAdapter(adapter);
                 }
 

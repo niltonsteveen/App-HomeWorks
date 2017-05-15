@@ -97,7 +97,7 @@ public class Activities_teacher extends Fragment {
 
         final ActividadWS actividadWS=restAdapter.create(ActividadWS.class);
         final List<Actividad> activitiesByEmail=new ArrayList<>();
-        actividadWS.getTodasActividades(new Callback<List<Actividad>>() {
+        actividadWS.getActividadesAll(new Callback<List<Actividad>>() {
                 @Override
                 public void success(List<Actividad> actividads, Response response) {
                     Date fecha=new Date();
@@ -124,11 +124,11 @@ public class Activities_teacher extends Fragment {
                     recycler.setHasFixedSize(true);
                     lManager = new LinearLayoutManager(getContext());
                     recycler.setLayoutManager(lManager);
-<<<<<<< HEAD
+/*<<<<<<< HEAD
                     adapter = new ActivityAdapter(activitiesByEmail);
-=======
+=======*/
                     adapter = new ActivityAdapter(actividads, getContext());
->>>>>>> 9f848818c6d53b9f43da4579eca296e4b7c941c0
+//>>>>>>> 9f848818c6d53b9f43da4579eca296e4b7c941c0
                     recycler.setAdapter(adapter);
                 }
 

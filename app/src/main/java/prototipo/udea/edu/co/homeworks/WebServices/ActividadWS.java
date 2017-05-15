@@ -18,10 +18,6 @@ public interface ActividadWS {
     /*@GET("/actividades")
     void getActividades(@Query("profesor") String profesor, Callback<List<Actividad>> cb) ;*/
 
-    @GET("/actividades")
-    void getTodasActividades(Callback<List<Actividad>> cb) ;
-
-
     @POST("/actividades")
     void createActivity(@Body Actividad actividad, Callback<Actividad> cb);
 
