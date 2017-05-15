@@ -124,7 +124,11 @@ public class Activities_teacher extends Fragment {
                     recycler.setHasFixedSize(true);
                     lManager = new LinearLayoutManager(getContext());
                     recycler.setLayoutManager(lManager);
+<<<<<<< HEAD
                     adapter = new ActivityAdapter(activitiesByEmail);
+=======
+                    adapter = new ActivityAdapter(actividads, getContext());
+>>>>>>> 9f848818c6d53b9f43da4579eca296e4b7c941c0
                     recycler.setAdapter(adapter);
                 }
 
@@ -133,9 +137,6 @@ public class Activities_teacher extends Fragment {
                 error.printStackTrace();
             }
         });
-
-
-
         return view;
 
     }

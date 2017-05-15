@@ -21,6 +21,10 @@ public interface ActividadWS {
     @GET("/actividades")
     void getTodasActividades(Callback<List<Actividad>> cb) ;
 
+
     @POST("/actividades")
     void createActivity(@Body Actividad actividad, Callback<Actividad> cb);
+
+    @GET("/actividades")
+    void getActividadesAll(Callback<List<Actividad>> cb) ;
 }
