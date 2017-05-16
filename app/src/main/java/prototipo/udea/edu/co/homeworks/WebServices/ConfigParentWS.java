@@ -15,4 +15,7 @@ public interface ConfigParentWS {
     @GET("/confacudientes")
     void getConfsByUser(Callback<List<ConfigParent>> cb);
 
+    @GET("/confacudientes")
+    void getAllAcudientes(Callback<List<ConfigParent>> cb);
+
 }

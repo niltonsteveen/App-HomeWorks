@@ -25,9 +25,6 @@ import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-/**
- * Creado por Hermosa Programación
- */
 public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ActivityViewHolder> {
     //private List<Solicitud> items;
     private List <Actividad> items;

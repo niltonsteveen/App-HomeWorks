@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,14 +27,18 @@ import java.util.List;
 import prototipo.udea.edu.co.homeworks.Model.Actividad;
 import prototipo.udea.edu.co.homeworks.Model.Asignatura;
 import prototipo.udea.edu.co.homeworks.Model.ConfProfesor;
+import prototipo.udea.edu.co.homeworks.Model.ConfigParent;
 import prototipo.udea.edu.co.homeworks.Model.Grupo;
 import prototipo.udea.edu.co.homeworks.Model.Usuario;
 import prototipo.udea.edu.co.homeworks.R;
 import prototipo.udea.edu.co.homeworks.WebServices.ActividadWS;
 import prototipo.udea.edu.co.homeworks.WebServices.AsignaturaWS;
 import prototipo.udea.edu.co.homeworks.WebServices.ConfProfesorWS;
+import prototipo.udea.edu.co.homeworks.WebServices.ConfigParentWS;
 import prototipo.udea.edu.co.homeworks.WebServices.GrupoWs;
+import prototipo.udea.edu.co.homeworks.WebServices.UsuarioWS;
 import prototipo.udea.edu.co.homeworks.utils.DatePickerFragment;
+import prototipo.udea.edu.co.homeworks.utils.NotificationSender;
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -64,6 +69,9 @@ public class Crear_Actividad extends Fragment {
     private String url= "https://rest-homeworks.herokuapp.com/api";
     List<RadioButton> radioButtonsGrupos;
     List<RadioButton> radioButtonsAsignaturas;
+    String asignatura="";
+    List<String> acudientes=new ArrayList<>();
+    private Actividad actividad;
 
     public Crear_Actividad() {
         // Required empty public constructor
@@ -110,7 +118,7 @@ public class Crear_Actividad extends Fragment {
         btnCrear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Actividad actividad=new Actividad();
+                actividad=new Actividad();
                 actividad.setProfesor(usuario.getEmail());
                 actividad.setActiva(true);
                 actividad.setDescripcion(descripcionCrearAct.getText().toString());
@@ -118,7 +126,7 @@ public class Crear_Actividad extends Fragment {
                 actividad.setFechaCreacion(fechaCreacion.toString());
                 actividad.setFechaLimite(fechaLimite);
 
-                String asignatura="";
+
                 int valor=0;
                 for(int i=0;i<radioButtonsAsignaturas.size();i++){
                     if(radioButtonsAsignaturas.get(i).isChecked()){
@@ -133,6 +141,7 @@ public class Crear_Actividad extends Fragment {
                 for(int i=0;i<radioButtonsGrupos.size();i++){
                     if(radioButtonsGrupos.get(i).isChecked()){
                         grupo=radioButtonsGrupos.get(i).getText().toString();
+
                         valor1=(int)hashMapGrupos.get(grupo);
                     }
                 }
@@ -140,16 +149,18 @@ public class Crear_Actividad extends Fragment {
 
                 actividadWS.createActivity(actividad, new Callback<Actividad>() {
                     @Override
-                    public void success(Actividad actividad, Response response) {
+                    public void success(Actividad activida1, Response response) {
                         Toast.makeText(getContext(),"Registrada correctamente",Toast.LENGTH_LONG).show();
                         FragmentManager fragmentManager=getFragmentManager();
                         Bundle arguments=new Bundle();
                         arguments.putParcelable("Usuario",usuario);
+                        buscarAcudientes(actividad.getGrupo());
                         FragmentoActividadesMain actividadesMain=FragmentoActividadesMain.newInstance(arguments);
                         fragmentManager
                                 .beginTransaction()
                                 .replace(R.id.main_content, actividadesMain)
                                 .commit();
+
                     }
 
                     @Override
@@ -192,6 +203,62 @@ public class Crear_Actividad extends Fragment {
 
         mostrarFecha();
         return view;
+    }
+
+    private void enviarNotificaciones(List<Usuario> usuarios, Actividad actividad) {
+        String msg="El profesor "+usuario.getNombres()+" ha añadido una nueva actividad para la asignatura " + asignatura;
+        for(Usuario user:usuarios){
+            Log.e("Token",user.getToken());
+            Log.e("Token1",usuario.getToken());
+            NotificationSender.sendNotification(user.getToken(),msg);
+        }
+    }
+
+    private List<Usuario> buscarUsuarios(final List<String> acudientes) {
+        final List<Usuario> usuariosRes=new ArrayList<>();
+        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(url).build();
+        final UsuarioWS usuarioWS=restAdapter.create(UsuarioWS.class);
+        usuarioWS.getUsers(new Callback<List<Usuario>>() {
+            @Override
+            public void success(List<Usuario> usuarios, Response response) {
+                for(int i=0;i<usuarios.size();i++){
+                    for(int j=0;j<acudientes.size();j++){
+                        if(usuarios.get(i).getEmail().equals(acudientes.get(j))) {
+                            usuariosRes.add(usuarios.get(i));
+                        }
+                    }
+                }
+                enviarNotificaciones(usuariosRes, actividad);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                error.printStackTrace();
+            }
+        });
+        return  usuariosRes;
+    }
+
+    private void buscarAcudientes(final Integer grupo) {
+        RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(url).build();
+        ConfigParentWS configParentWS=restAdapter.create(ConfigParentWS.class);
+        configParentWS.getAllAcudientes(new Callback<List<ConfigParent>>() {
+            @Override
+            public void success(List<ConfigParent> configParents, Response response) {
+                for(int i=0;i<configParents.size();i++){
+                    Log.e("entro", configParents.get(i).getUsuario());
+                    if(configParents.get(i).getGrupo()==grupo){
+                        acudientes.add(configParents.get(i).getUsuario());
+                    }
+                }
+                buscarUsuarios(acudientes);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                error.printStackTrace();
+            }
+        });
     }
 
     private void getAsignaturas(List<ConfProfesor> confProfesores) {
