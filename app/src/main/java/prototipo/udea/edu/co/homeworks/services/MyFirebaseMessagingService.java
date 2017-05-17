@@ -3,11 +3,17 @@ package prototipo.udea.edu.co.homeworks.services;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import prototipo.udea.edu.co.homeworks.Activities.MainActivity;
 import prototipo.udea.edu.co.homeworks.R;
@@ -18,24 +24,33 @@ import prototipo.udea.edu.co.homeworks.R;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
+    public MyFirebaseMessagingService() {
+    }
+
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
-
-        String mensaje = remoteMessage.getNotification().getBody();
-        ShowNotification(mensaje);
+        Map<String, String> mensaje = remoteMessage.getData();
+        String msj = mensaje.get("body");
+        ShowNotification(msj);
         Log.e("mensaje",""+ mensaje);
 
     }
 
     private void ShowNotification(String mensaje) {
-
+        Log.d("custom notification", mensaje);
         Intent i = new Intent(this, MainActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,0,i,PendingIntent.FLAG_UPDATE_CURRENT);
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this).setAutoCancel(true).setContentTitle("HomeWorksNotifications")
-                .setContentText(mensaje)
-                .setSmallIcon(R.drawable.logo_final).setContentIntent(pendingIntent);
+        Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+                .setAutoCancel(true).setContentTitle("HomeWorksNotifications")
+                .setSound(sound)
+                .setContentText(mensaje).setVibrate(new long[]{1000,1000,1000,1000,1000,1000,1000,1000,1000})
+                .setSmallIcon(R.drawable.logo_notif).setLargeIcon(BitmapFactory.decodeResource(
+                        getResources(), R.drawable.logo_final)).setContentIntent(pendingIntent);
+
         NotificationManager manager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
         manager.notify(0,builder.build());
     }

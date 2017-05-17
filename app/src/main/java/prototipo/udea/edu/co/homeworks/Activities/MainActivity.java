@@ -2,38 +2,29 @@ package prototipo.udea.edu.co.homeworks.Activities;
 
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.support.annotation.NonNull;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.iid.FirebaseInstanceId;
 
-import java.util.List;
-
 import de.hdodenhof.circleimageview.CircleImageView;
-import prototipo.udea.edu.co.homeworks.Fragments.FragmentVacio;
 import prototipo.udea.edu.co.homeworks.Fragments.FragmentoActividadesMain;
-import prototipo.udea.edu.co.homeworks.Fragments.PreFragConf;
-import prototipo.udea.edu.co.homeworks.Model.Actividad;
-import prototipo.udea.edu.co.homeworks.Model.ConfigParent;
 import prototipo.udea.edu.co.homeworks.Model.Usuario;
 import prototipo.udea.edu.co.homeworks.R;
 import prototipo.udea.edu.co.homeworks.WebServices.UsuarioWS;
 import prototipo.udea.edu.co.homeworks.WebServices.builders.RestClientBuilder;
-import prototipo.udea.edu.co.homeworks.utils.NotificationSender;
+import prototipo.udea.edu.co.homeworks.services.MyFirebaseMessagingService;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -94,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         // manage this apps subscriptions on the server side, send the
         // Instance ID token to your app server.
         sendRegistrationToServer(usuario);
+        startService(new Intent(this, MyFirebaseMessagingService.class));
 /*
         mAuth=FirebaseAuth.getInstance();
         authStateListener=new FirebaseAuth.AuthStateListener() {
